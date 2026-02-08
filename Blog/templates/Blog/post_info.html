@@ -13,7 +13,9 @@
 <section id="summary">
   <h2>{{ post.title }}</h2>
   <article>
-    <img src="{% static "Blog/images/"|add:post.image %}" alt="{{ post.title }}" />
+      {% if post.image_name %}
+        <img src="{% static "Blog/images/"|add:post.image_name %}" alt="{{ post.title }}" />
+      {% endif %}
     <address>By {{ post.author }}</address>
     <div>Last updated on <time>{{ post.date|date:"d M Y" }}</time></div>
   </article>
