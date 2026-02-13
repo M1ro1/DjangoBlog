@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}
+    Stored Posts
+{% endblock %}
+{% block css_files %}
+<link rel="stylesheet" href="{% static 'Blog/stored_posts.css' %}" />
+{% endblock %}
+{% block content %}
+<section id ='stored_posts'>
+{% if not has_posts %}
+    <p>You dont have any posts</p>
+{% endif %}
+    <ul>
+        {% for post in posts %}
+        <li>
+            <a href ='{% url 'post_info' post.slug %}'>{{ post.title }}</a>
+            <form action="{% url 'read_later' %}" method="post" style="display:inline; margin-left:8px;">
+                {% csrf_token %}
+                <input type="hidden" name="post_id" value="{{ post.id }}">
+                <input type="hidden" name="action" value="remove">
+                <button type="submit">Remove</button>
+            </form>
+        </li>
+        {% endfor %}
+
+    </ul>
+</section>
+{% endblock %}

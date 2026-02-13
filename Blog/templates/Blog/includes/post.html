@@ -1,10 +1,8 @@
-{% load static %}
-
 <li>
   <article class="post">
     <a href="{% url 'post_info' post.slug %}">
         {% if post.image_name %}
-      <img src="{% static "Blog/images/"|add:post.image_name %}" alt="{{ post.title }}"/>
+      <img src="{{ post.image_name.url }}" alt="{{ post.title }}"/>
         {% endif %}
       <div class="post__content">
         <h3>{{ post.title }}</h3>
